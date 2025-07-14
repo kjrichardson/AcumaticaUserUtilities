@@ -1,2 +1,2 @@
-# AcumaticaUserManagementHelpers
-Acumatica User Management Helpers
+# AcumaticaUserUtilities
+Acumatica User Utilities
