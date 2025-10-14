@@ -18,7 +18,7 @@ For LoginTypes, use either Add All Roles, Add Employee Roles, or Add Guest Roles
 
 ## Dependencies
 
-- **Acumatica ERP Framework**: This project is built as an extension for Acumatica ERP.
+- **Acumatica ERP 2025r1**: This project is built as an extension for Acumatica ERP 2025r1.
 - **.NET Framework 4.8**: Ensure your environment supports this version.
 
 ## Contributing
@@ -32,4 +32,4 @@ Contributions are welcome! Please follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+See the [LICENSE](LICENSE) file for license details.
