@@ -52,3 +52,10 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+
+*.ide-wal
+*.ide
+.vs/
+*.lnk
+*.bat
