@@ -77,6 +77,23 @@ namespace AcumaticaUserUtilities
         }
 
         /// <summary>
+        /// Transfers grid preferences from one user to another.
+        /// </summary>
+        /// <remarks>This method updates the grid preferences in the database by reassigning them from the
+        /// specified source user  to the target user. Both usernames must be valid and correspond to existing users in
+        /// the system.</remarks>
+        /// <param name="FromUser">The username of the user whose grid preferences will be transferred.</param>
+        /// <param name="ToUser">The username of the user to whom the grid preferences will be assigned.</param>
+        public virtual void MoveGridPreferencesToUser(string FromUser, string ToUser)
+        {
+            PXDatabase.Update<GridPreferences>(
+                    new PXDataFieldAssign("UserName", ToUser),
+                    new PXDataFieldRestrict("UserName", FromUser)
+                );
+        }
+
+
+        /// <summary>
         /// Transfers all favorite screens, tiles, and pinned screens from one user to another.
         /// </summary>
         /// <remarks>This method updates the database to reassign all favorite screens, tiles, and pinned
@@ -160,6 +177,7 @@ namespace AcumaticaUserUtilities
                  );
                 MoveFavoriesToUser(OldUserName, NewUserName);
                 MoveFiltersToUser(OldUserName, NewUserName);
+                MoveGridPreferencesToUser(OldUserName, NewUserName);
 
                 //menu on the left/top
                 PXDatabase.Update<MUIUserPreferences>(
