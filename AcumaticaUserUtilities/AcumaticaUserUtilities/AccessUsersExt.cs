@@ -170,6 +170,7 @@ namespace AcumaticaUserUtilities
                 PXDatabase.Update<Users>(
                      new PXDataFieldAssign<Users.username>(NewUserName),
                      new PXDataFieldAssign<Users.source>(PXUsersSourceListAttribute.Application),
+                     new PXDataFieldAssign<Users.extRef>(null),
                      new PXDataFieldAssign<Users.allowPasswordRecovery>(true),
                      new PXDataFieldAssign<Users.passwordChangeable>(true),
                      new PXDataFieldAssign<Users.password>(Guid.NewGuid().ToString()),
