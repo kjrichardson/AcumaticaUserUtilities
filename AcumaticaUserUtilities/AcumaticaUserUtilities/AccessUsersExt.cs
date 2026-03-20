@@ -160,13 +160,14 @@ namespace AcumaticaUserUtilities
             if (OldUserName.Contains(NewUserName) == false)
                 throw new PXException(Messages.EmailRequiredToPreventDuplicates);
 
+
             using (var ts = new PXTransactionScope())
             {
-
+                //convert AD roles to local roles
+                ConvertADRolesToLocal.Press();
+                Base.Save.Press();
                 //check for existing user with the email address and fail if found.
 
-                ConvertRolesFromAD();
-                Base.Save.Press();
                 PXDatabase.Update<Users>(
                      new PXDataFieldAssign<Users.username>(NewUserName),
                      new PXDataFieldAssign<Users.source>(PXUsersSourceListAttribute.Application),
@@ -184,6 +185,12 @@ namespace AcumaticaUserUtilities
                 PXDatabase.Update<MUIUserPreferences>(
                        new PXDataFieldAssign<MUIUserPreferences.username>(NewUserName),
                        new PXDataFieldRestrict<MUIUserPreferences.username>(OldUserName)
+                   );
+
+                //migrate role assignments
+                PXDatabase.Update<UsersInRoles>(
+                       new PXDataFieldAssign<UsersInRoles.username>(NewUserName),
+                       new PXDataFieldRestrict<UsersInRoles.username>(OldUserName)
                    );
                 ts.Complete();
             }
